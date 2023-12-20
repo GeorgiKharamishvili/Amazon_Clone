@@ -12,7 +12,7 @@ const Registration = () => {
     formState: { errors, isSubmitting }, // Add isSubmitting from formState
     handleSubmit,
     watch,
-    reset
+    reset,
   } = useForm();
 
   const [loading, setLoading] = React.useState(false); // Add loading state
@@ -32,12 +32,11 @@ const Registration = () => {
       };
 
       const response = await axios.post(apiUrl, postData);
-
     } catch (error) {
       console.error("API Error:", error);
     } finally {
-      navigate("/")
-      reset()
+      navigate("/");
+      reset();
       setLoading(false); // Set loading back to false, whether success or failure
     }
   };
@@ -71,6 +70,12 @@ const Registration = () => {
                     },
                   })}
                 />
+                {/* {errName && (
+                  <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
+                    <span className="italic font-titleFont font-extrabold text-base">!</span>
+                    {errName}
+                  </p>{errors?.name?.message}
+                )} */}
                 <label className="label">
                   {errors.name?.type === "required" && (
                     <p className="text-red-600 text-xs font-semibold tracking-wide flex items-center gap-2 -mt-1.5">
@@ -160,6 +165,8 @@ const Registration = () => {
                 disabled={isSubmitting}
                 className="w-full py-1.5 text-sm font-normal rounded-sm bg-gradient-to-t from-[#f7dfa5] to-[#f0c14b] hover:bg-gradient-to-b border border-zinc-400 active:border-yellow-800 active:shadow-amazonInput"
               />
+            </div>
+
             <p className="text-xs text-black leading-4 mt-4">
               By continuing, you agree to Amazon's{" "}
               <span className="text-blue-600">Conditions of Use </span>and{" "}
